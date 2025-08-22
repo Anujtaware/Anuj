@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learnify — Modern E‑Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f172a;          /* slate-900 */
+      --bg-soft:#111827;      /* gray-900 */
+      --panel:#0b1220;        /* deep */
+      --card:#111827;         /* gray-900 */
+      --muted:#9ca3af;        /* gray-400 */
+      --text:#f8fafc;         /* slate-50 */
+      --brand:#6366f1;        /* indigo-500 */
+      --brand-2:#22d3ee;      /* cyan-400 */
+      --accent:#10b981;       /* emerald-500 */
+      --warning:#f59e0b;      /* amber-500 */
+      --danger:#ef4444;       /* red-500 */
+      --ring: 0 0 0 3px rgba(99,102,241,.35);
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.3);
+      --shadow-soft: 0 8px 24px rgba(2,6,23,.35);
+      --container: 1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,.25), transparent 40%),radial-gradient(1000px 600px at 90% 0%, rgba(34,211,238,.18), transparent 40%),var(--bg);color:var(--text);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--container);margin-inline:auto;padding:0 20px}
+    .btn{display:inline-flex;gap:.55rem;align-items:center;justify-content:center;padding:.8rem 1.1rem;border-radius:calc(var(--radius) - 6px);font-weight:600;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));backdrop-filter: blur(6px);box-shadow: var(--shadow-soft);transition:.2s}
+    .btn:hover{transform:translateY(-1px);}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border-color:transparent}
+    .btn-ghost{background:transparent}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .55rem;border-radius:999px;font-weight:600;font-size:.78rem;border:1px solid rgba(255,255,255,.12);color:var(--muted)}
+    .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(16,185,129,.25)}
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(15,23,42,.95), rgba(15,23,42,.65));backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;gap:16px;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:.4px}
+    .logo .mark{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 8px 20px rgba(99,102,241,.45)}
+    .navlinks{display:flex;gap:14px;margin-left:18px}
+    .navlinks a{padding:8px 12px;border-radius:10px;color:#cbd5e1}
+    .navlinks a.active,.navlinks a:hover{color:#fff;background:rgba(255,255,255,.05)}
+    .search{margin-left:auto;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:12px;min-width:240px}
+    .search input{all:unset;display:block;width:100%;color:#e5e7eb}
+    .auth{display:flex;gap:10px;margin-left:10px}
+    .mobile-toggle{display:none}
+    .hero{padding:64px 0 36px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns: 1.1fr .9fr;gap:28px;align-items:center}
+    .eyebrow{margin-bottom:14px}
+    h1{font-size: clamp(2rem, 3.2vw + 1rem, 3.2rem);line-height:1.15;margin:0 0 14px}
+    .lead{font-size:1.05rem;color:#cbd5e1;max-width:58ch}
+    .hero-actions{display:flex;gap:12px;margin:22px 0 10px}
+    .stats{display:flex;gap:18px;margin-top:18px;color:#cbd5e1}
+    .stat{padding:10px 14px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.04)}
+    .stat strong{display:block;font-size:1.15rem;color:#fff}
+    .hero-art{position:relative}
+    .screen{border-radius:16px;border:1px solid rgba(255,255,255,.1);overflow:hidden;background:linear-gradient(180deg,#0b1220,#0d1626);box-shadow:var(--shadow)}
+    .screen header{position:static;background:transparent;border:none;padding:10px 12px}
+    .window-dots{display:flex;gap:6px}
+    .dot{width:10px;height:10px;border-radius:50%}
+    .dot.r{background:#ef4444}.dot.y{background:#f59e0b}.dot.g{background:#10b981}
+    .code{font-family: ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9rem;color:#e5e7eb;padding:12px 16px;white-space:pre-wrap}
+    section{padding:42px 0}
+    .section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}
+    .section-title h2{margin:0;font-size:1.6rem}
+    .section-sub{color:#9ca3af}
+    .grid{display:grid;gap:16px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow-soft)}
+    .card:hover{transform:translateY(-2px);transition:.2s}
+    .cat{display:flex;align-items:center;gap:12px}
+    .cat .icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.35)}
+    .course{display:flex;flex-direction:column;gap:10px}
+    .course .thumb{aspect-ratio: 16/9;border-radius:12px;background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(34,211,238,.2));border:1px solid rgba(255,255,255,.08)}
+    .course .meta{display:flex;gap:10px;flex-wrap:wrap;color:#cbd5e1;font-size:.92rem}
+    .chip{padding:.15rem .5rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.75rem;color:#cbd5e1}
+    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .feature{padding:18px}
+    .feature .big{font-size:1.35rem;font-weight:700}
+    .feature p{color:#cbd5e1;margin:.3rem 0 0}
+    .testimonials{display:grid;grid-template-columns: 1fr 1fr;gap:16px}
+    .quote{position:relative;padding:16px}
+    .quote:before{content:"\201C";position:absolute;left:16px;top:-10px;font-size:4rem;opacity:.15}
+    .quote p{margin:.5rem 0 0;color:#cbd5e1}
+    .avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .cta{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px;border-radius:var(--radius);background:linear-gradient(135deg, rgba(99,102,241,.35), rgba(34,211,238,.25));border:1px solid rgba(255,255,255,.14)}
+    footer{padding:36px 0;color:#cbd5e1;border-top:1px solid rgba(255,255,255,.08)}
+    .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:16px}
+    .foot h4{margin:.3rem 0 1rem;color:#fff}
+    .foot a{display:block;padding:.2rem 0;color:#cbd5e1}
+    .copy{margin-top:20px;display:flex;justify-content:space-between;align-items:center;border-top:1px dashed rgba(255,255,255,.12);padding-top:16px}
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr 1fr}
+      .grid.cols-3{grid-template-columns:1fr 1fr}
+      .grid.cols-4{grid-template-columns:1fr 1fr}
+      .foot{grid-template-columns:1fr 1fr}
+      .search{min-width:unset;flex:1}
+    }
+    @media (max-width: 680px){
+      .navlinks{display:none}
+      .mobile-toggle{display:inline-flex;margin-left:8px}
+      .features,.testimonials,.grid.cols-3,.grid.cols-4,.foot{grid-template-columns:1fr}
+      .cta{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo" aria-label="Learnify Home">
+        <span class="mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3l9 5.25v7.5L12 21 3 15.75v-7.5L12 3z" fill="white" opacity=".2"/>
+            <path d="M12 7l5.5 3.2v3.6L12 17l-5.5-3.2V10.2L12 7z" fill="white"/>
+          </svg>
+        </span>
+        Learnify
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a class="active" href="#courses">Courses</a>
+        <a href="#tracks">Tracks</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="search" role="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="#9ca3af" stroke-width="2"/></svg>
+        <input id="search" placeholder="Search courses, topics…" aria-label="Search courses" />
+      </div>
+      <div class="auth">
+        <a class="btn btn-ghost" href="#login">Sign in</a>
+        <a class="btn btn-primary" href="#get-started">Get Started</a>
+      </div>
+      <button class="btn btn-ghost mobile-toggle" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+    </div>
+    <div id="mobileMenu" class="container" style="display:none;padding-bottom:14px">
+      <nav>
+        <a class="btn btn-ghost" style="width:100%;margin-bottom:8px" href="#courses">Courses</a>
+        <a class="btn btn-ghost" style="width:100%;margin-bottom:8px" href="#tracks">Tracks</a>
+        <a class="btn btn-ghost" style="width:100%;margin-bottom:8px" href="#pricing">Pricing</a>
+        <a class="btn btn-ghost" style="width:100%" href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge eyebrow"><span class="dot"></span> Learn anything, at your pace</span>
+        <h1>Level up your skills with hands‑on, modern e‑learning.</h1>
+        <p class="lead">Bite‑sized lessons, interactive projects, and mentorship from industry experts. Join 120k+ learners accelerating their careers in tech and beyond.</p>
+        <div class="hero-actions">
+          <a href="#courses" class="btn btn-primary">Browse Courses</a>
+          <a href="#tracks" class="btn">View Learning Paths</a>
+        </div>
+        <div class="stats" aria-label="platform stats">
+          <div class="stat"><strong>1,200+</strong> Lessons</div>
+          <div class="stat"><strong>250+</strong> Projects</div>
+          <div class="stat"><strong>98%</strong> Satisfaction</div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="screen">
+          <div class="container" style="padding:12px 14px 0">
+            <div class="window-dots" aria-hidden="true"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          </div>
+          <div class="code" id="sampleCode" aria-live="polite">
+<strong>// Example: Binary Search (Java)</strong>
+class Solution {
+  int binarySearch(int[] a, int key){
+    int l = 0, r = a.length - 1;
+    while(l <= r){
+      int m = l + (r - l) / 2;
+      if(a[m] == key) return m;
+      if(a[m] < key) l = m + 1; else r = m - 1;
+    }
+    return -1;
+  }
+}
+
+<strong>// Tip:</strong> Time complexity is <em>O(log n)</em>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracks">
+    <div class="container">
+      <div class="section-title">
+        <h2>Explore categories</h2>
+        <p class="section-sub">Hand‑crafted paths for every level</p>
+      </div>
+      <div class="grid cols-3" id="categoryGrid">
+        <div class="card cat"><div class="icon">💻</div><div><strong>Data Structures & Algorithms</strong><div class="section-sub">Master the fundamentals</div></div></div>
+        <div class="card cat"><div class="icon">🌐</div><div><strong>Web Development</strong><div class="section-sub">Frontend & backend</div></div></div>
+        <div class="card cat"><div class="icon">🧠</div><div><strong>AI & Machine Learning</strong><div class="section-sub">From zero to ML hero</div></div></div>
+        <div class="card cat"><div class="icon">☁️</div><div><strong>Cloud & DevOps</strong><div class="section-sub">Deploy and scale</div></div></div>
+        <div class="card cat"><div class="icon">🗄️</div><div><strong>Databases</strong><div class="section-sub">SQL, NoSQL & design</div></div></div>
+        <div class="card cat"><div class="icon">🔐</div><div><strong>Cybersecurity</strong><div class="section-sub">Secure by design</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="courses">
+    <div class="container">
+      <div class="section-title">
+        <h2>Featured courses</h2>
+        <p class="section-sub">Trending and highly rated</p>
+      </div>
+      <div class="grid cols-3" id="courseGrid">
+        <article class="card course" data-tags="dsa algorithms beginner">
+          <div class="thumb" role="img" aria-label="DSA Essentials"></div>
+          <h3>DSA Essentials in Java</h3>
+          <div class="meta"><span>by Priya Sharma</span>·<span>18h</span>·<span>Beginner</span></div>
+          <div class="meta" aria-label="rating">⭐⭐⭐⭐☆ (4.7)</div>
+          <div>
+            <span class="chip">Arrays</span>
+            <span class="chip">Trees</span>
+            <span class="chip">DP</span>
+          </div>
+          <a class="btn" href="#">Enroll</a>
+        </article>
+
+        <article class="card course" data-tags="web react frontend intermediate">
+          <div class="thumb" role="img" aria-label="React Pro"></div>
+          <h3>React & TypeScript: Pro Path</h3>
+          <div class="meta"><span>by Karan Patel</span>·<span>22h</span>·<span>Intermediate</span></div>
+          <div class="meta">⭐⭐⭐⭐⭐ (4.9)</div>
+          <div>
+            <span class="chip">Hooks</span>
+            <span class="chip">Type Safety</span>
+            <span class="chip">Testing</span>
+          </div>
+          <a class="btn" href="#">Enroll</a>
+        </article>
+
+        <article class="card course" data-tags="ml ai python beginner">
+          <div class="thumb" role="img" aria-label="ML Zero to Hero"></div>
+          <h3>Machine Learning: Zero → Hero</h3>
+          <div class="meta"><span>by Ananya Rao</span>·<span>26h</span>·<span>Beginner</span></div>
+          <div class="meta">⭐⭐⭐⭐☆ (4.6)</div>
+          <div>
+            <span class="chip">Pandas</span>
+            <span class="chip">Scikit‑learn</span>
+            <span class="chip">Modeling</span>
+          </div>
+          <a class="btn" href="#">Enroll</a>
+        </article>
+
+        <article class="card course" data-tags="devops cloud docker kubernetes">
+          <div class="thumb" role="img" aria-label="Cloud Native"></div>
+          <h3>Cloud‑Native DevOps</h3>
+          <div class="meta"><span>by Ravi Gupta</span>·<span>20h</span>·<span>Intermediate</span></div>
+          <div class="meta">⭐⭐⭐⭐☆ (4.7)</div>
+          <div>
+            <span class="chip">Docker</span>
+            <span class="chip">K8s</span>
+            <span class="chip">CI/CD</span>
+          </div>
+          <a class="btn" href="#">Enroll</a>
+        </article>
+
+        <article class="card course" data-tags="dbms sql postgres advanced">
+          <div class="thumb" role="img" aria-label="Advanced SQL"></div>
+          <h3>Advanced SQL & Data Modeling</h3>
+          <div class="meta"><span>by Isha Mehta</span>·<span>14h</span>·<span>Advanced</span></div>
+          <div class="meta">⭐⭐⭐⭐⭐ (5.0)</div>
+          <div>
+            <span class="chip">Indexing</span>
+            <span class="chip">Optimization</span>
+            <span class="chip">ERD</span>
+          </div>
+          <a class="btn" href="#">Enroll</a>
+        </article>
+
+        <article class="card course" data-tags="security cybersecurity beginner">
+          <div class="thumb" role="img" aria-label="Security Basics"></div>
+          <h3>Cybersecurity Foundations</h3>
+          <div class="meta"><span>by Neha Kapoor</span>·<span>16h</span>·<span>Beginner</span></div>
+          <div class="meta">⭐⭐⭐⭐ (4.5)</div>
+          <div>
+            <span class="chip">OWASP</span>
+            <span class="chip">Network</span>
+            <span class="chip">Threats</span>
+          </div>
+          <a class="btn" href="#">Enroll</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Why learners choose us</h2>
+        <p class="section-sub">Real‑world skills, real outcomes</p>
+      </div>
+      <div class="features">
+        <div class="card feature">
+          <div class="big">🧩 Projects first</div>
+          <p>Build a portfolio with hands‑on projects, not just theory.</p>
+        </div>
+        <div class="card feature">
+          <div class="big">🧑‍🏫 Mentor support</div>
+          <p>Get unstuck fast with Q&A and weekly office hours.</p>
+        </div>
+        <div class="card feature">
+          <div class="big">📈 Career focus</div>
+          <p>Interview prep, code reviews, and resume feedback.</p>
+        </div>
+        <div class="card feature">
+          <div class="big">💡 Bite‑sized lessons</div>
+          <p>Short videos and interactive quizzes that fit your schedule.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="what-students-say">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="what-students-say">What students say</h2>
+        <p class="section-sub">Loved by developers and beginners alike</p>
+      </div>
+      <div class="testimonials">
+        <div class="card quote">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="avatar" aria-hidden="true"></div>
+            <div><strong>Anuj T.</strong><div class="section-sub">SWE Intern</div></div>
+          </div>
+          <p>“The DSA track turned my weak topics into strengths. The practice sets and explanations are 🔥.”</p>
+        </div>
+        <div class="card quote">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="avatar" aria-hidden="true"></div>
+            <div><strong>Kavya S.</strong><div class="section-sub">Frontend Dev</div></div>
+          </div>
+          <p>“I landed my first role after the React path + mock interviews. Totally worth it.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h3 style="margin:0">Ready to start learning?</h3>
+          <p class="section-sub" style="margin:.3rem 0 0">Join thousands leveling up their skills each week.</p>
+        </div>
+        <div>
+          <a href="#get-started" class="btn btn-primary">Create a free account</a>
+          <a href="#pricing" class="btn">See pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="about">
+    <div class="container">
+      <div class="foot">
+        <div>
+          <a href="#" class="logo"><span class="mark"></span> Learnify</a>
+          <p class="section-sub">Modern e‑learning platform for practical, job‑ready skills.</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <a href="#courses">Courses</a>
+          <a href="#tracks">Learning Paths</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#">Mobile App</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#about">About</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Press</a>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <a href="#">Help Center</a>
+          <a href="#">Community</a>
+          <a href="#">Status</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© <span id="year"></span> Learnify. All rights reserved.</span>
+        <div>
+          <a class="badge" href="#"><span class="dot" style="background:var(--brand)"></span> Twitter</a>
+          <a class="badge" href="#"><span class="dot" style="background:var(--brand-2)"></span> LinkedIn</a>
+          <a class="badge" href="#"><span class="dot" style="background:var(--accent)"></span> GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', () => {
+      const open = menu.style.display !== 'none';
+      menu.style.display = open ? 'none' : 'block';
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const search = document.getElementById('search');
+    const cards = Array.from(document.querySelectorAll('#courseGrid .course'));
+    search?.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const text = (card.innerText + ' ' + (card.dataset.tags || '')).toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+
+    const codeEl = document.getElementById('sampleCode');
+    const full = codeEl.textContent;
+    let i = 0; codeEl.textContent = '';
+    const tick = () => {
+      codeEl.textContent += full[i++];
+      if(i < full.length) requestAnimationFrame(tick);
+    }; requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
